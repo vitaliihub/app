@@ -93,6 +93,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'myshop.wsgi.application'
 
 
+
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
@@ -170,3 +171,16 @@ CELERY_RESULT_BAKEND = env('CELERY_RESULT_BAKEND')
 REDIS_HOST = env('REDIS_HOST')
 REDIS_PORT = env('REDIS_PORT')
 REDIS_DB = env('REDIS_DB')
+
+
+# Redis cache
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
+

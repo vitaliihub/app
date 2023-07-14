@@ -1,5 +1,4 @@
 media
-static
 dump.rdb
 .flake8
 .mypy.ini

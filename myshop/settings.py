@@ -1,6 +1,8 @@
 from pathlib import Path
-
 import environ
+
+from google.oauth2 import service_account
+
 
 env = environ.Env(
     DEBUG=(bool),
@@ -137,8 +139,20 @@ STATIC_ROOT = BASE_DIR / 'static'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-MEDIA_URL = 'media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
+    BASE_DIR / '*')
+
+
+# MEDIA_URL = 'media/'
+# MEDIA_ROOT = BASE_DIR / 'media'
+
+
+DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+GS_PROJECT_ID = '*'
+GS_BUCKET_NAME = '*'
+MEDIA_ROOT = 'media/'
+UPLOAD_ROOT = 'media/uploads/'
+MEDIA_URL = 'https://storage.googleapis.com/{}/'.format(GS_BUCKET_NAME)
 
 
 CART_SESSION_ID = 'cart'
